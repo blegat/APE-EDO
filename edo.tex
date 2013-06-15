@@ -1,0 +1,197 @@
+\documentclass[fontsize=12pt]{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[frenchb]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+
+% Math symbols
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% Numbers and units
+\usepackage[squaren, Gray]{SIunits}
+\usepackage{sistyle}
+\usepackage[autolanguage]{numprint}
+%\usepackage{numprint}
+\newcommand\si[2]{\numprint[#2]{#1}}
+\newcommand\np[1]{\numprint{#1}}
+
+\DeclareMathOperator{\newdiff}{d} % use \dif instead
+\newcommand{\dif}{\newdiff\!}
+\newcommand{\fpart}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ffpart}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\fdpart}[3]{\frac{\partial^2 #1}{\partial #2\partial #3}}
+\newcommand{\fdif}[2]{\frac{\dif #1}{\dif #2}}
+\newcommand{\ffdif}[2]{\frac{\dif^2 #1}{\dif #2^2}}
+\newcommand{\constant}{\ensuremath{\mathrm{cst}}}
+
+\newcommand{\vmin}{V_\mathrm{min}}
+\newcommand{\vmax}{V_\mathrm{max}}
+\newcommand{\tmax}{T_\mathrm{max}}
+\newcommand{\dmax}{D_\mathrm{max}}
+\newcommand{\tdmin}{TD_\mathrm{min}}
+\newcommand{\vtmax}{VT_\mathrm{max}}
+\newcommand{\vdmax}{VD_\mathrm{max}}
+\newcommand{\mmax}{M_\mathrm{max}}
+\newcommand{\cjour}{C_\mathrm{jour}}
+
+\usepackage{xparse}% for using parameters at the end block
+
+% Inclure une image
+\NewDocumentEnvironment{image}{mm}
+{\begin{figure}[!ht]\begin{center}}
+{\caption{#2}\label{#1}\end{center}\end{figure}}
+
+\newcommand{\showimage}[3]
+{\begin{image}{fig:#2}{#3}\centering
+\includegraphics[width=\textwidth]{#1}\end{image}}
+
+% Inclure in plot matlab
+\usepackage{xargs}
+\newcommand{\matlabplot}[2]
+{\showimage{Images/#1.eps}{#1}{#2 Généré par le listing~\ref{lst:#1}}.}
+\newcommand{\matlabcode}[2]
+{\lstinputlisting[caption={Contenu du fichier \lstinline{#1.m}
+  contenant l'implementation de la fonction \lstinline{#1}.
+#2},label={lst:#1}]
+{MATLAB/#1.m}}
+
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{listings}
+\definecolor{dkgreen}{rgb}{0.25,0.7,0.35}
+\definecolor{dkred}{rgb}{0.7,0,0}
+\lstset{language={Matlab},numbers=left,numberstyle=\tiny\color{gray},
+keywordstyle=\bfseries\color{dkred},frame=single,
+commentstyle=\color{gray}=small,stringstyle=\color{dkgreen},
+basicstyle=\rm\footnotesize\ttfamily} % basicstyle=\rm\footnotesize
+
+\newcommand{\matlab}{\textsc{Matlab}}
+
+\title{Correctif EDO}
+\author{Benoît Legat}
+
+\begin{document}
+
+\maketitle
+
+Les corrections de ce correctif seront soumises au prof d'EDO pour
+être rajoutée dans le syllabus de l'an prochain.
+En attendant, elles sont publiées par ce biais ci.
+Vous êtes bien entendu invités à en ajouter.
+
+\section*{5.3.1}
+Reformulons le problème comme suit
+\begin{align*}
+\begin{pmatrix}
+  u_1\\u_2
+\end{pmatrix}' & =
+\begin{pmatrix}
+  0 & 1\\-\lambda^2 & 0
+\end{pmatrix}
+\begin{pmatrix}
+  u_1\\u_2
+\end{pmatrix}
++
+\begin{pmatrix}
+  0\\f
+\end{pmatrix}\\
+0 & =  u_2(1) - u_1(1)\\
+u_1(-1) - u_2(-1) & = 0.
+\end{align*}
+
+Ce système possède une solution
+ssi $\forall v: [-1;1] \to \mathbb{R}^2$ tel que
+\[\begin{pmatrix}
+  v_1\\v_2
+\end{pmatrix}' =
+\begin{pmatrix}
+  0 & \lambda^2\\-1 & 0
+\end{pmatrix} 
+\begin{pmatrix}v_1\\v_2
+\end{pmatrix}\]
+
+et $(\alpha|v(-1)) = (\beta|v(1))$ $\forall \alpha,\beta \in\mathbb{R}^2$
+tels que $B_{-1}(\alpha) = B_1(\beta)$
+avec $B_{-1}[\alpha] =
+\begin{pmatrix}
+  0\\\alpha_1-\alpha_2
+\end{pmatrix}$ et
+$B_1 =
+\begin{pmatrix}
+  \beta_2-\beta_1\\0
+\end{pmatrix}$
+on a
+\[ \int_{-1}^1 f(s)v_2(s) \dif s = 0 \].
+
+
+Donc $\alpha_1 = \alpha_2$ et $\beta_1 = \beta_2$.
+Les conditions aux limites pour $v$ deviennent
+\[\alpha_1(v_1(-1) + v_2(-1)) = \beta_1(v_1(1) + v_2(1))\]
+$\forall \alpha_1,\beta_1 \in\mathbb{R}$.
+
+On a 2 conditions aux limites linéairement indépendantes
+\begin{align*}
+  v_1(-1) + v_2(-1) & = 0\\
+  v_1(1) + v_2(1) & = 0.
+\end{align*}
+
+\paragraph{Résolution}
+$v_2'' = -v_1' = -\lambda^2 v_2$
+Si $\lambda \neq 0$,
+$v_2(t) = A \cos(\lambda t) + B\sin(\lambda t)$ où $A, B \in \mathbb{R}$
+\begin{align*}
+  v_1(t) & = -v_2'(t)\\
+  & = A\lambda\sin(\lambda t) - B\lambda\cos(\lambda t)
+\end{align*}
+Si on explicite les conditions aux limites, on a
+\begin{align}
+  \label{eq:cl1}
+  A \cos\lambda - B \sin\lambda - A\lambda \sin\lambda - B\lambda\cos\lambda & = 0\\
+  \label{eq:cl2}
+  A \cos\lambda + B \sin\lambda + A\lambda \sin\lambda - B\lambda\cos\lambda & = 0.
+\end{align}
+Par $\eqref{eq:cl1} + \eqref{eq:cl2}$,
+\[ 2A\cos\lambda - 2B\lambda\cos\lambda = 0 \]
+et par $\eqref{eq:cl1} - \eqref{eq:cl2}$,
+\[ 2B\sin\lambda + 2A\lambda\sin\lambda = 0 \]
+d'où
+\begin{align*}
+  \cos\lambda (A - B\lambda) & = 0\\
+  \sin\lambda (B + A\lambda) & = 0.
+\end{align*}
+
+On doit considérer ici plusieurs cas
+\begin{itemize}
+  \item Si $\lambda \neq k\frac{\pi}{2}$, $k \in \mathbb{Z}$,
+    $A - B\lambda = 0$ et $B + A\lambda = 0$ donc $A = B = 0$.
+
+  \item Si $\lambda = k\pi$, $k \in \mathbb{Z}_0$, $A = B\lambda$,
+    donc
+    \[ 0 = \int_{-1}^1 f(t) (\lambda \cos(\lambda t) + \sin(\lambda t)) \dif t. \]
+
+  \item Si $\lambda = \frac{\pi}{2} + k\pi$, $k \in \mathbb{Z}$, $B = -A\lambda$,
+    donc
+    \[ 0 = \int_{-1}^1 f(t) (\cos(\lambda t) - \lambda\sin(\lambda t)) \dif t. \]
+\end{itemize}
+
+Si $\lambda = 0$,
+\begin{align*}
+  v_2(t) & = A + Bt\\
+  v_1(t) & = -B
+\end{align*}
+et par les conditions aux limites
+\begin{align*}
+  A + B - B & = 0\\
+  A - B - B & = 0.
+\end{align*}
+Donc $A = B = 0$, du coup, pas de contrainte sur $f$.
+
+\end{document}
