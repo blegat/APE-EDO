@@ -87,111 +87,206 @@ Les corrections de ce correctif seront soumises au prof d'EDO pour
 En attendant, elles sont publiées par ce biais ci.
 Vous êtes bien entendu invités à en ajouter.
 
-\section*{5.3.1}
-Reformulons le problème comme suit
-\begin{align*}
-\begin{pmatrix}
-  u_1\\u_2
-\end{pmatrix}' & =
-\begin{pmatrix}
-  0 & 1\\-\lambda^2 & 0
-\end{pmatrix}
-\begin{pmatrix}
-  u_1\\u_2
-\end{pmatrix}
-+
-\begin{pmatrix}
-  0\\f
-\end{pmatrix}\\
-0 & =  u_2(1) - u_1(1)\\
-u_1(-1) - u_2(-1) & = 0.
-\end{align*}
+\section{Systèmes linéaires à coefficients constants}
 
-Ce système possède une solution
-ssi $\forall v: [-1;1] \to \mathbb{R}^2$ tel que
-\[\begin{pmatrix}
-  v_1\\v_2
-\end{pmatrix}' =
-\begin{pmatrix}
-  0 & \lambda^2\\-1 & 0
-\end{pmatrix} 
-\begin{pmatrix}v_1\\v_2
-\end{pmatrix}\]
+\section{Systèmes linéaires à coefficients variables}
 
-et $(\alpha|v(-1)) = (\beta|v(1))$ $\forall \alpha,\beta \in\mathbb{R}^2$
-tels que $B_{-1}(\alpha) = B_1(\beta)$
-avec $B_{-1}[\alpha] =
-\begin{pmatrix}
-  0\\\alpha_1-\alpha_2
-\end{pmatrix}$ et
-$B_1 =
-\begin{pmatrix}
-  \beta_2-\beta_1\\0
-\end{pmatrix}$
-on a
-\[ \int_{-1}^1 f(s)v_2(s) \dif s = 0 \].
+\section{Systèmes d'équations différentielles ordinaires non linéaires}
 
-
-Donc $\alpha_1 = \alpha_2$ et $\beta_1 = \beta_2$.
-Les conditions aux limites pour $v$ deviennent
-\[\alpha_1(v_1(-1) + v_2(-1)) = \beta_1(v_1(1) + v_2(1))\]
-$\forall \alpha_1,\beta_1 \in\mathbb{R}$.
-
-On a 2 conditions aux limites linéairement indépendantes
-\begin{align*}
-  v_1(-1) + v_2(-1) & = 0\\
-  v_1(1) + v_2(1) & = 0.
-\end{align*}
-
-\paragraph{Résolution}
-$v_2'' = -v_1' = -\lambda^2 v_2$
-Si $\lambda \neq 0$,
-$v_2(t) = A \cos(\lambda t) + B\sin(\lambda t)$ où $A, B \in \mathbb{R}$
-\begin{align*}
-  v_1(t) & = -v_2'(t)\\
-  & = A\lambda\sin(\lambda t) - B\lambda\cos(\lambda t)
-\end{align*}
-Si on explicite les conditions aux limites, on a
-\begin{align}
-  \label{eq:cl1}
-  A \cos\lambda - B \sin\lambda - A\lambda \sin\lambda - B\lambda\cos\lambda & = 0\\
-  \label{eq:cl2}
-  A \cos\lambda + B \sin\lambda + A\lambda \sin\lambda - B\lambda\cos\lambda & = 0.
-\end{align}
-Par $\eqref{eq:cl1} + \eqref{eq:cl2}$,
-\[ 2A\cos\lambda - 2B\lambda\cos\lambda = 0 \]
-et par $\eqref{eq:cl1} - \eqref{eq:cl2}$,
-\[ 2B\sin\lambda + 2A\lambda\sin\lambda = 0 \]
-d'où
-\begin{align*}
-  \cos\lambda (A - B\lambda) & = 0\\
-  \sin\lambda (B + A\lambda) & = 0.
-\end{align*}
-
-On doit considérer ici plusieurs cas
-\begin{itemize}
-  \item Si $\lambda \neq k\frac{\pi}{2}$, $k \in \mathbb{Z}$,
-    $A - B\lambda = 0$ et $B + A\lambda = 0$ donc $A = B = 0$.
-
-  \item Si $\lambda = k\pi$, $k \in \mathbb{Z}_0$, $A = B\lambda$,
+\subsection*{3.1}
+Supposons sans perte de généralité que $x \leq y$ pour que $[x,y]$ ait du sens
+\begin{enumerate}
+  \item Lipchitzienne avec $L = 1$ car, comme
+    $|\sin t| \leq 1$ $\forall t \in \mathbb{R}$,
+    \[ |f(t,y) - f(t,x)| \leq |\cos y - \cos x| \]
+    et par Taylor, $\exists c \in [x,y]$ tel que
+    \[ \cos y = \cos x - \sin c (y - x) \]
     donc
-    \[ 0 = \int_{-1}^1 f(t) (\lambda \cos(\lambda t) + \sin(\lambda t)) \dif t. \]
-
-  \item Si $\lambda = \frac{\pi}{2} + k\pi$, $k \in \mathbb{Z}$, $B = -A\lambda$,
+    \[ |f(t,y) - f(t,x)| \leq |\sin c| \cdot |y - x| \leq |y - x|. \]
+  \item Pas lipschitzienne car
+    \[ |f(t,y) - f(t,x)| = |t|\cdot||y| - |x|| \]
+    et comme $L$ ne peut pas dépendre de $t$ et que $|t|$ peut être aussi
+    grand que l'on veut, il n'existe pas de constante $L$.
+  \item Lipschitzienne avec $L = 1$ car
+    \[ |f(t,y) - f(t,x)| = ||y| - |x|| \leq |y - x|. \]
+  \item Lipschitzienne avec $L = 1$ car
+    \[ |f(t,y) - f(t,x)| = |t|\cdot||y| - |x|| \leq \cdot |y - x|. \]
+  \item $\sqrt{t}$ défini pour tout $t \in [-1,1]$ ?
+  \item Pas lipschitzienne avec car
+    \[ |f(t,y) - f(t,x)| = |t|\cdot|\sqrt{y} - \sqrt{x}| \]
+    et par Taylor, $\exists c \in [x,y]$ tel que
+    \[ \sqrt{y} = \sqrt{x} + \frac{1}{2\sqrt{c}}(y-x) \]
+    d'où
+    \[ |f(t,y) - f(t,x)| = |t|\frac{1}{2\sqrt{c}}|y-x|. \]
+    En prenant $t \neq 0$ et en faisant tendre $x$ et $y$ vers 0,
+    $\frac{1}{c}$ devient aussi grand que l'on veut donc $L$ n'existe pas.
+  \item Idem, ne serait-ce pas $f:[-1,1]\times[1,\infty[$ ?
+  \item Lipschitzienne avec $L = 1$ car $\forall t \in [0,1]$,
+    \[ |f(t,y) - f(t,x)| = ||y| - |x|| \leq |y - x| \]
+    et $\forall t \in [-1,0[$,
+    \[ |f(t,y) - f(t,x)| = |-|y| + |x|| \leq |y - x|. \]
+  \item Lipchitzienne avec $L = 1$ car, par Taylor,
+    $\exists c \in [x,y]$ tel que
+    \[ \arctan y = \arctan x + \frac{1}{1+c^2} (y - x) \]
     donc
-    \[ 0 = \int_{-1}^1 f(t) (\cos(\lambda t) - \lambda\sin(\lambda t)) \dif t. \]
-\end{itemize}
+    \[ |f(t,y) - f(t,x)| \leq \frac{1}{1+c^2} \cdot |y - x| \leq |y - x|. \]
+\end{enumerate}
 
-Si $\lambda = 0$,
-\begin{align*}
-  v_2(t) & = A + Bt\\
-  v_1(t) & = -B
-\end{align*}
-et par les conditions aux limites
-\begin{align*}
-  A + B - B & = 0\\
-  A - B - B & = 0.
-\end{align*}
-Donc $A = B = 0$, du coup, pas de contrainte sur $f$.
+\subsection*{3.6}
+\begin{enumerate}
+  \item Oui, par l'unicité globale car comme
+    $f(t,x) = 0$ est de classe $C^1$ en espace,
+    $f$ et localement lipschitzien.
+  \item Oui, par l'unicité globale car comme
+    $f(t,x) = x^2$ est de classe $C^1$ en espace,
+    $f$ et localement lipschitzien.
+  \item Non, en intégrant on obtient $u(t)\ln u(t) + u(t) = t$.
+    On trouve deux solutions à ça qui sont ?
+  \item Oui, par l'unicité globale car comme
+    $f(t,x) = \sin(x)$ est de classe $C^1$ en espace,
+    $f$ est localement lipschitzien.
+  \item Oui, la dérivée en espace de $f(t,x) = \sqrt[3]{x^2}$ est
+    $D_x f(t,x) = \frac{1}{3\sqrt[3]{x}}$ qui est continue sauf en $x = 0$.
+    Seulement, tout n'est pas perdu car on intégrant, on trouve
+    $3\sqrt[3]{u(t)} = t$ qui ne comporte comme unique solution
+    $u(t) = \frac{t^3}{27}$.
+\end{enumerate}
+
+\subsection*{3.16}
+\begin{enumerate}
+  \item
+  \item
+  \item
+  \item
+  \item
+  \item
+  \item
+  \item
+  \item
+\end{enumerate}
+
+\subsection*{3.18}
+\begin{enumerate}
+  \item
+  \item
+  \item
+  \item
+  \item
+\end{enumerate}
+
+\section{Stabilité de systèmes d'équations différentielles autonomes}
+
+\section{Problèmes aux limites pour les
+systèmes d'équations différentielles linéaires}
+
+\subsection*{5.3}
+\begin{enumerate}
+  \item
+    Reformulons le problème comme suit
+    \begin{align*}
+    \begin{pmatrix}
+      u_1\\u_2
+    \end{pmatrix}' & =
+    \begin{pmatrix}
+      0 & 1\\-\lambda^2 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+      u_1\\u_2
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+      0\\f
+    \end{pmatrix}\\
+    0 & =  u_2(1) - u_1(1)\\
+    u_1(-1) - u_2(-1) & = 0.
+    \end{align*}
+
+    Ce système possède une solution
+    ssi $\forall v: [-1;1] \to \mathbb{R}^2$ tel que
+    \[\begin{pmatrix}
+      v_1\\v_2
+    \end{pmatrix}' =
+    \begin{pmatrix}
+      0 & \lambda^2\\-1 & 0
+    \end{pmatrix} 
+    \begin{pmatrix}v_1\\v_2
+    \end{pmatrix}\]
+
+    et $(\alpha|v(-1)) = (\beta|v(1))$ $\forall \alpha,\beta \in\mathbb{R}^2$
+    tels que $B_{-1}(\alpha) = B_1(\beta)$
+    avec $B_{-1}[\alpha] =
+    \begin{pmatrix}
+      0\\\alpha_1-\alpha_2
+    \end{pmatrix}$ et
+    $B_1 =
+    \begin{pmatrix}
+      \beta_2-\beta_1\\0
+    \end{pmatrix}$
+    on a
+    \[ \int_{-1}^1 f(s)v_2(s) \dif s = 0 \].
+
+
+    Donc $\alpha_1 = \alpha_2$ et $\beta_1 = \beta_2$.
+    Les conditions aux limites pour $v$ deviennent
+    \[\alpha_1(v_1(-1) + v_2(-1)) = \beta_1(v_1(1) + v_2(1))\]
+    $\forall \alpha_1,\beta_1 \in\mathbb{R}$.
+
+    On a 2 conditions aux limites linéairement indépendantes
+    \begin{align*}
+      v_1(-1) + v_2(-1) & = 0\\
+      v_1(1) + v_2(1) & = 0.
+    \end{align*}
+
+    \paragraph{Résolution}
+    $v_2'' = -v_1' = -\lambda^2 v_2$
+    Si $\lambda \neq 0$,
+    $v_2(t) = A \cos(\lambda t) + B\sin(\lambda t)$ où $A, B \in \mathbb{R}$
+    \begin{align*}
+      v_1(t) & = -v_2'(t)\\
+      & = A\lambda\sin(\lambda t) - B\lambda\cos(\lambda t)
+    \end{align*}
+    Si on explicite les conditions aux limites, on a
+    \begin{align}
+      \label{eq:cl1}
+      A \cos\lambda - B \sin\lambda - A\lambda \sin\lambda - B\lambda\cos\lambda & = 0\\
+      \label{eq:cl2}
+      A \cos\lambda + B \sin\lambda + A\lambda \sin\lambda - B\lambda\cos\lambda & = 0.
+    \end{align}
+    Par $\eqref{eq:cl1} + \eqref{eq:cl2}$,
+    \[ 2A\cos\lambda - 2B\lambda\cos\lambda = 0 \]
+    et par $\eqref{eq:cl1} - \eqref{eq:cl2}$,
+    \[ 2B\sin\lambda + 2A\lambda\sin\lambda = 0 \]
+    d'où
+    \begin{align*}
+      \cos\lambda (A - B\lambda) & = 0\\
+      \sin\lambda (B + A\lambda) & = 0.
+    \end{align*}
+
+    On doit considérer ici plusieurs cas
+    \begin{itemize}
+      \item Si $\lambda \neq k\frac{\pi}{2}$, $k \in \mathbb{Z}$,
+        $A - B\lambda = 0$ et $B + A\lambda = 0$ donc $A = B = 0$.
+
+      \item Si $\lambda = k\pi$, $k \in \mathbb{Z}_0$, $A = B\lambda$,
+        donc
+        \[ 0 = \int_{-1}^1 f(t) (\lambda \cos(\lambda t) + \sin(\lambda t)) \dif t. \]
+
+      \item Si $\lambda = \frac{\pi}{2} + k\pi$, $k \in \mathbb{Z}$, $B = -A\lambda$,
+        donc
+        \[ 0 = \int_{-1}^1 f(t) (\cos(\lambda t) - \lambda\sin(\lambda t)) \dif t. \]
+    \end{itemize}
+
+    Si $\lambda = 0$,
+    \begin{align*}
+      v_2(t) & = A + Bt\\
+      v_1(t) & = -B
+    \end{align*}
+    et par les conditions aux limites
+    \begin{align*}
+      A + B - B & = 0\\
+      A - B - B & = 0.
+    \end{align*}
+    Donc $A = B = 0$, du coup, pas de contrainte sur $f$.
+\end{enumerate}
 
 \end{document}
