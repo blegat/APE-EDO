@@ -75,6 +75,7 @@ basicstyle=\rm\footnotesize\ttfamily} % basicstyle=\rm\footnotesize
 
 \newcommand{\matlab}{\textsc{Matlab}}
 
+\usepackage{wasysym}
 
 \usepackage{bm}
 
@@ -99,11 +100,11 @@ Vous êtes bien entendu invités à en ajouter.
       w''(t)-4w'(t)-5w(t)=f(t)
     \end{equation}
 
-    Posons 
+    Posons
     \begin{equation}
       \bm{u}(t) = \left(
         \begin{matrix}
-          w(t)\\w'(t) 
+          w(t)\\w'(t)
         \end{matrix}
       \right)
     \end{equation}
@@ -136,7 +137,7 @@ Vous êtes bien entendu invités à en ajouter.
         \end{matrix}
       \right)
     \end{equation}
-    Pour trouver $e^{tA}$ nous devons donc résoudre 
+    Pour trouver $e^{tA}$ nous devons donc résoudre
     \begin{eqnarray*}
       \left(
         \begin{matrix}
@@ -161,7 +162,7 @@ Vous êtes bien entendu invités à en ajouter.
     \right)
   \end{eqnarray*}
 
-  Nous avons donc que 
+  Nous avons donc que
   \begin{equation}
     c''(t) -5c'(t) -4c(t)=0
   \end{equation}
@@ -185,12 +186,12 @@ Nous avons l'équation suivante:
 u''(t) = \frac{u'(t)}{t} + \left( 1 - \frac{3}{t} \right) \cdot u(t)  \hspace{1 cm } t>0
 \end{equation}
 
-ainsi qu'une solution 
+ainsi qu'une solution
 \begin{equation}
 u_1(t) = t^2 e^{-t}
 \end{equation}
 
-Posons 
+Posons
 \begin{eqnarray}
 \bm{u_1}(t) &=& (u_1(t)  \hspace{0.3cm}u_1'(t))^T\\
 &=&(t^2 e^{-t} \hspace{0.5cm} 2t e^{-t} -t^2 e^{-t} )^T
@@ -209,7 +210,7 @@ Nous pouvons mettre ce problème sous le forme matricielle:
 \right) \cdot \bm{v}
 \end{eqnarray*}
 
-Nous savons que la seconde solution de l'équation \ref{eq_2.15_1} est de la forme 
+Nous savons que la seconde solution de l'équation \ref{eq_2.15_1} est de la forme
 \begin{equation}
 \bm{u_2}(t) = \alpha(t) \bm{u_1}(t) + \bm{w}(t)
 \end{equation}
@@ -234,7 +235,7 @@ Nous savons que la dérivée de $\bm{u_2}$ doit être égale à sa dérivée via
 \frac{\beta(t)}{t}&=&\alpha'(t)\cdot \left( 2t e^{-t} -t^2 e^{-t}  \right) +\beta'(t)
 \end{eqnarray}
 
-On obtient donc que 
+On obtient donc que
 \begin{equation}
 \alpha'(t) = \frac{\beta(t)}{t^2 e^{-t}} \label{eq_2.15_ab}
 \end{equation}
@@ -248,7 +249,7 @@ En remplaçant cela dans la seconde équation du système, nous obtenons:
 \int_1^t \frac{\beta'(t)}{\beta(t)} &=& \int_1^t1-\frac{1}{t}\\
 \ln{\beta(t)} &=& t-\ln t + 1
 \end{eqnarray*}
-On peut supprimer les constant car après dérivation elles disparaissent. On obtient donc que 
+On peut supprimer les constant car après dérivation elles disparaissent. On obtient donc que
 \begin{equation}
 \beta(t) = \frac{e^{t}}{t}
 \end{equation}
@@ -318,11 +319,14 @@ Supposons sans perte de généralité que $x \leq y$ pour que $[x,y]$ ait du sen
   \item Oui, par l'unicité globale car comme
     $f(t,x) = \sin(x)$ est de classe $C^1$ en espace,
     $f$ est localement lipschitzien.
-  \item Oui, la dérivée en espace de $f(t,x) = \sqrt[3]{x^2}$ est
+  \item Non, la dérivée en espace de $f(t,x) = \sqrt[3]{x^2}$ est
     $D_x f(t,x) = \frac{1}{3\sqrt[3]{x}}$ qui est continue sauf en $x = 0$.
-    Seulement, tout n'est pas perdu car on intégrant, on trouve
+    Ça ne nous permet tout de même pas de conclure car c'est suffisant à
+    l'unicité mais pas nécessaire.
+    On pourrait croire qu'elle est unique car en intégrant, on trouve
     $3\sqrt[3]{u(t)} = t$ qui ne comporte comme unique solution
-    $u(t) = \frac{t^3}{27}$.
+    $u(t) = \frac{t^3}{27}$ mais ce faisant, on divise par $u(t)$ et
+    $u(t) = 0$ pour tout $t$ est aussi une solution.
 \end{enumerate}
 
 \subsection*{3.16}
@@ -340,9 +344,98 @@ Supposons sans perte de généralité que $x \leq y$ pour que $[x,y]$ ait du sen
 
 \subsection*{3.18}
 \begin{enumerate}
+  \item Oui. Commençons par prouver qu'il existe une courbe intégrale maximale.
+    On peut réécrir le problème comme suit
+    \begin{align*}
+      \begin{pmatrix}
+        u'(t)\\
+        v'(t)
+      \end{pmatrix} & =
+      \begin{pmatrix}
+        v(t)\\
+        \sin(u(t))
+      \end{pmatrix}.
+    \end{align*}
+
+    Soit $f:\mathbb{R}\times\mathbb{R}^2\to\mathbb{R}^2:
+    (t,u,v)\mapsto(v,\sin u)$, on voit que $f$ est continue et que
+    $f$ est localement lipschitzienne car
+    \[ D_uf(t,u,v) =
+    \begin{pmatrix}
+      0 & 1\\
+      \cos u & 0
+    \end{pmatrix} \]
+    est continue.
+
+    Par le théorème d'existence maximale, il existe donc une courbe intégrale
+    maximale et elle est unique.
+
+    Soit $u:I\to\mathbb{R}$ cette courbe intégrale maximale telle que
+    $u(0) = u_0$ et $v(0) = v_0$, montrons que $I = \mathbb{R}$.
+    Soit $u$ une courbe intégrale maximale.
+    On remarque que $|u''(t)| \leq 1$.
+    Du coup,
+    \begin{align*}
+      |u'(t) - v_0| & \leq |t - t_0|\\
+      |u'(t)| & \leq |v_0| + |t - t_0|\\
+      |u(t) - u_0| & \leq |v_0|\cdot|t - t_0| + \frac{|t - t_0|^2}{2}\\
+      |u(t)| & \leq |u_0| + |v_0|\cdot|t - t_0| + \frac{|t - t_0|^2}{2}.
+    \end{align*}
+    Soit $T > 0$. Considérons
+    \[ K_T = \{(t,u) \in \mathbb{R}^2|
+    t \in [t_0-T,t_0+T] \land |u| \leq
+    |u_0| + |v_0|\cdot|t - t_0| + \frac{|t - t_0|^2}{2}\}. \]
+    On remarque que $K_T$ est compact et comme $u$ est une courbe intégrale
+    maximale,
+    \begin{align*}
+      \sup\{t \in I : (t,u(t)) \in K_T\} & \in I\\
+      \inf\{t \in I : (t,u(t)) \in K_T\} & \in I
+    \end{align*}
+    or, par construction de $K_T$,
+    \begin{align*}
+      \sup\{t \in I : (t,u(t)) \in K_T\} & = t_0 + T\\
+      \inf\{t \in I : (t,u(t)) \in K_T\} & = t_0 - T.
+    \end{align*}
+    Donc $[t_0-T;t_0+T] \subseteq I$.
+    Puisque ceci est vrai $\forall T > 0$, $I = \mathbb{R}$.
   \item
+    Idem \smiley
   \item
-  \item
+    Commençons par prouver qu'il existe une courbe intégrale maximale
+    et qu'elle est unique.
+    En effet, si on montre que pour certains $u_0,v_0$, une courbe intégrale
+    n'est pas maximale, si on ne sait pas qu'elle est unique,
+    on ne prouve pas qu'il y en a pas pour ces $u_0,v_0$
+    définis sur $\mathbb{R}$.
+    On peut réécrir le problème comme suit
+    \begin{align*}
+      \begin{pmatrix}
+        u'(t)\\
+        v'(t)
+      \end{pmatrix} & =
+      \begin{pmatrix}
+        v(t)\\
+        u(t)^3
+      \end{pmatrix}.
+    \end{align*}
+
+    Soit $f:\mathbb{R}\times\mathbb{R}^2\to\mathbb{R}^2:
+    (t,u,v)\mapsto(v,\sin u)$, on voit que $f$ est continue et que
+    $f$ est localement lipschitzienne car
+    \[ D_uf(t,u,v) =
+      \begin{pmatrix}
+        0 & 1\\
+        3u^2 & 0
+    \end{pmatrix} \]
+    est continue.
+
+    Par le théorème d'existence maximale, il existe donc une courbe intégrale
+    maximale et elle est unique.
+
+    Soit $u:I\to\mathbb{R}$ cette courbe intégrale maximale telle que
+
+    On remarque que $\frac{\sqrt{2}}{t-1}$ est solution et que cette solution
+    est maximale sur $I = ]-\infty,1[$.
   \item
   \item
 \end{enumerate}
@@ -381,7 +474,7 @@ systèmes d'équations différentielles linéaires}
     \end{pmatrix}' =
     \begin{pmatrix}
       0 & \lambda^2\\-1 & 0
-    \end{pmatrix} 
+    \end{pmatrix}
     \begin{pmatrix}v_1\\v_2
     \end{pmatrix}\]
 
