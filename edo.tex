@@ -75,8 +75,11 @@ basicstyle=\rm\footnotesize\ttfamily} % basicstyle=\rm\footnotesize
 
 \newcommand{\matlab}{\textsc{Matlab}}
 
+
+\usepackage{bm}
+
 \title{Correctif EDO}
-\author{Benoît Legat}
+\author{Benoît Legat \and Julien Vaes}
 
 \begin{document}
 
@@ -89,7 +92,177 @@ Vous êtes bien entendu invités à en ajouter.
 
 \section{Systèmes linéaires à coefficients constants}
 
+\subsection*{1.18}
+\begin{enumerate}
+  \item[a)]
+    \begin{equation}
+      w''(t)-4w'(t)-5w(t)=f(t)
+    \end{equation}
+
+    Posons 
+    \begin{equation}
+      \bm{u}(t) = \left(
+        \begin{matrix}
+          w(t)\\w'(t) 
+        \end{matrix}
+      \right)
+    \end{equation}
+    Nous avons le système suivant
+    \begin{equation}
+      \bm{u}'(t) = \left(
+        \begin{matrix}
+          0&1 \\
+          4&5 \\
+        \end{matrix}
+      \right) \cdot \bm{u}+\left(
+        \begin{matrix}
+          0 \\
+          f(t) \\
+        \end{matrix}
+      \right)
+    \end{equation}
+
+    Trouvons donc l'expression de $e^{tA}$. Nous savons que $\frac{de^{tA}}{dt} = Ae^{tA}$. Nous savons aussi que
+    \begin{equation}
+      e^{0A} = I
+    \end{equation}
+
+    Posons
+    \begin{equation}
+      e^{tA}= \left(
+        \begin{matrix}
+          a&b \\
+          c&d \\
+        \end{matrix}
+      \right)
+    \end{equation}
+    Pour trouver $e^{tA}$ nous devons donc résoudre 
+    \begin{eqnarray*}
+      \left(
+        \begin{matrix}
+          a'&b' \\
+          c'&d' \\
+        \end{matrix}
+      \right) &=&\left(
+        \begin{matrix}
+          0&1 \\
+          4&5 \\
+        \end{matrix}
+      \right) \cdot\left( \begin{matrix}
+          a&b \\
+          c&d \\
+        \end{matrix}
+      \right)\\
+      &=& \left(
+      \begin{matrix}
+        c&d \\
+        4a+5c&4b+5d \\
+      \end{matrix}
+    \right)
+  \end{eqnarray*}
+
+  Nous avons donc que 
+  \begin{equation}
+    c''(t) -5c'(t) -4c(t)=0
+  \end{equation}
+
+  Donc
+  \begin{equation}
+    c(t) = C_1 e^{\frac{5+\sqrt{41}}{2}} + C_2 e^{\frac{5-\sqrt{41}}{2}}
+  \end{equation}
+
+
+
+\item[b)]
+\end{enumerate}
+
+
 \section{Systèmes linéaires à coefficients variables}
+
+\subsection*{2.15}
+Nous avons l'équation suivante:
+\begin{equation} \label{eq_2.15_1}
+u''(t) = \frac{u'(t)}{t} + \left( 1 - \frac{3}{t} \right) \cdot u(t)  \hspace{1 cm } t>0
+\end{equation}
+
+ainsi qu'une solution 
+\begin{equation}
+u_1(t) = t^2 e^{-t}
+\end{equation}
+
+Posons 
+\begin{eqnarray}
+\bm{u_1}(t) &=& (u_1(t)  \hspace{0.3cm}u_1'(t))^T\\
+&=&(t^2 e^{-t} \hspace{0.5cm} 2t e^{-t} -t^2 e^{-t} )^T
+\end{eqnarray}
+
+
+
+Nous pouvons mettre ce problème sous le forme matricielle:
+\begin{eqnarray*}
+\bm{v}' &=& \bm{A}[\bm{v}]\\
+\bm{v}'&=&\left(
+\begin {matrix}
+ 0&1 \\
+ 1-\frac{3}{t}&\frac{1}{t} \\
+\end{matrix}
+\right) \cdot \bm{v}
+\end{eqnarray*}
+
+Nous savons que la seconde solution de l'équation \ref{eq_2.15_1} est de la forme 
+\begin{equation}
+\bm{u_2}(t) = \alpha(t) \bm{u_1}(t) + \bm{w}(t)
+\end{equation}
+
+où nous avons un vecteur $\bm{e}$ tel que
+\begin{eqnarray*}
+(\bm{e}|\bm{u_1}(t)) &\neq& 0\\
+(\bm{e}|\bm{w}(t))&=&0
+\end{eqnarray*}
+
+Prenons $\bm{e}=(1\hspace{0.3cm}0)^T$ nous avons donc que $\bm{w}(t) = (0\hspace{0.3cm}\beta(t))^T$.
+
+Nous savons que la dérivée de $\bm{u_2}$ doit être égale à sa dérivée via le système matriciel. Nous obtenons donc le système suivant:
+\begin{eqnarray}
+\bm{A}[\alpha(t) \bm{u_1}(t)]+\bm{A}[(0 \hspace{0.3 cm} \beta(t))^T] &=& \bm{A}[\alpha(t)\bm{u_1}(t)] + \alpha'(t)\bm{u_1}(t)+\beta'(t)\cdot (0 \hspace{0.3 cm} 1)^T\\
+\bm{A}[(0 \hspace{0.3 cm} \beta(t))^T] &=&  \alpha'(t)\bm{u_1}(t)+\beta'(t)\cdot (0 \hspace{0.3 cm} 1)^T
+\end{eqnarray}
+
+ Ce qui donne les deux équations suivantes
+ \begin{eqnarray}
+\beta(t)&=&\alpha'(t)t^2e^{-t}\\
+\frac{\beta(t)}{t}&=&\alpha'(t)\cdot \left( 2t e^{-t} -t^2 e^{-t}  \right) +\beta'(t)
+\end{eqnarray}
+
+On obtient donc que 
+\begin{equation}
+\alpha'(t) = \frac{\beta(t)}{t^2 e^{-t}} \label{eq_2.15_ab}
+\end{equation}
+
+En remplaçant cela dans la seconde équation du système, nous obtenons:
+\begin{eqnarray*}
+\frac{\beta(t)}{t}&=&\frac{\beta(t)}{t^2 e^{-t}}\cdot \left( 2t e^{-t} -t^2 e^{-t}  \right) +\beta'(t)\\
+\frac{\beta(t)}{t}&=&\frac{\beta(t)}{t}\cdot \left( 2-t  \right) +\beta'(t)\\
+0&=& \frac{\beta(t)}{t}\cdot \left( 1-t  \right)+\beta'(t)\\
+\frac{\beta'(t)}{\beta(t)}&=&\frac{t-1}{t} = 1-\frac{1}{t}\\
+\int_1^t \frac{\beta'(t)}{\beta(t)} &=& \int_1^t1-\frac{1}{t}\\
+\ln{\beta(t)} &=& t-\ln t + 1
+\end{eqnarray*}
+On peut supprimer les constant car après dérivation elles disparaissent. On obtient donc que 
+\begin{equation}
+\beta(t) = \frac{e^{t}}{t}
+\end{equation}
+
+De part l'équation \ref{eq_2.15_ab}, on trouve
+\begin{equation}
+\alpha(t)= \left( \int_{t_0}^t \frac{e^{2t}}{t^3} \right)
+\end{equation}
+
+On trouve donc comme seconde solution:
+\begin{equation}
+v_2(t) = \left( \int_{t_0}^t \frac{e^{2t}}{t^3} \right) \cdot t^2 e^{-t}
+\end{equation}
+
 
 \section{Systèmes d'équations différentielles ordinaires non linéaires}
 
