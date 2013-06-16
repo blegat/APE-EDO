@@ -1,10 +1,10 @@
-\documentclass[fontsize=12pt]{article}
+\documentclass{article}
 
 \usepackage[utf8x]{inputenc}
 \usepackage[frenchb]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{fullpage}
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage{caption}
@@ -432,15 +432,135 @@ Supposons sans perte de généralité que $x \leq y$ pour que $[x,y]$ ait du sen
     Par le théorème d'existence maximale, il existe donc une courbe intégrale
     maximale et elle est unique.
 
-    Soit $u:I\to\mathbb{R}$ cette courbe intégrale maximale telle que
+    Soit $u:I\to\mathbb{R}$ cette courbe intégrale maximale pour
+    $(u_0,v_0) = (-\sqrt{2},-\sqrt{2})$.
 
     On remarque que $\frac{\sqrt{2}}{t-1}$ est solution et que cette solution
     est maximale sur $I = ]-\infty,1[$.
+    Comme on a montré que la solution est unique,
+    il n'existe pas de courbe intégrale maximale définie sur tout $\mathbb{R}$
+    pour $(u_0,v_0) = (-\sqrt{2},-\sqrt{2})$.
   \item
   \item
 \end{enumerate}
 
 \section{Stabilité de systèmes d'équations différentielles autonomes}
+
+\subsection*{4.1}
+On voit que $f(x_1,x_2) = (-2x_1 + x_1^5 - 3x_2, x_1 + x_2 - x_2^5)$.
+On commence par vérifier que $f(0,0) = (0,0)$ et que $f$ est dérivable.
+Ensuite, comme
+\[ Df(x_1,x_2) =
+\begin{pmatrix}
+  -2 + 5x_1^4 & -3\\
+  1 & 1 - 5x_2^4
+\end{pmatrix} \]
+est continue, $f$ est localement lipschitzien.
+
+On peut donc déterminer la stabilité de $(0,0)$ à l'aide de
+\[ Df(0, 0) =
+\begin{pmatrix}
+  -2 & -3\\
+  1 & 1
+\end{pmatrix}. \]
+Comme sa trace est négative est que son déterminant est positif,
+on sait que les deux valeurs propres ont une partie réelle négative.
+Elles valent d'ailleurs $1/2 \pm i\sqrt{3}/2$.
+
+$(0,0)$ est donc un équilibre asymptotiquement stable et donc aussi
+un équilibre stable.
+
+\subsection*{4.2}
+On voit que $f(x_1,x_2) = (x_1 + e^{x_2} - \cos(x_2), 3x_1 - x_2 - \sin(x_2))$.
+On commence par vérifier que $f(0,0) = (0,0)$ et que $f$ est dérivable.
+Ensuite, comme
+\[ Df(x_1,x_2) =
+\begin{pmatrix}
+  1 & e^{x_2} + \sin(x_2)\\
+  3 & -1 - \cos(x_2)
+\end{pmatrix} \]
+est continue, $f$ est localement lipschitzien.
+
+On peut donc déterminer la stabilité de $(0,0)$ à l'aide de
+\[ Df(0, 0) =
+\begin{pmatrix}
+  1 & 1\\
+  3 & -2
+\end{pmatrix}. \]
+Comme sa trace et son déterminant sont négatifs,
+on sait qu'une valeur propre a une partie réelle positive,
+on sait que les deux valeurs propres ont une partie réelle négative.
+Elles valent d'ailleurs $(-1 - \sqrt{21})/2$ et $(-1+\sqrt{21})/2$.
+
+$(0,0)$ est donc un équilibre instable.
+
+\subsection*{4.3}
+\begin{enumerate}
+  \item
+    Par la formule de dérivée en chaine, on a
+    \begin{align*}
+      \fdif{V(x,y,z)}{t} & = \fpart{V(x,y,z)}{x} x' +
+      \fpart{V(x,y,z)}{y} y' + \fpart{V(x,y,z)}{z} z'\\
+      & = 2axx' + 2byy' + 2czz'\\
+      & = 4axy(z-1) - 2bxy(z-1) - 2cz^4\\
+      & = 2(2a-b)xy(z-1) - 2cz^4
+    \end{align*}
+
+    En prenant $2a = b$ et $c = 1/2$, on a
+    $\fdif{V(x,y,z)}{t} = -z^4 \leq 0$ $\forall x,y,z \in \mathbb{R}^3$.
+    $(a,b,c) = (1,2,1/2)$ sont donc des réels tels que $V$ soit une
+    fonction de Liapounov.
+  \item
+    Prenons, $(a,b,c) = (1,2,1/2)$.
+    Comme $V$ est un polynôme, $V$ est continu et sa dérivée est continue.
+    $f$ qui est manifestement défini par
+    $f(x,y,z) = (2y(z-1), -x(z-1), -z^3)$ a une jacobienne valant
+    \[ Df(x,y,z) =
+    \begin{pmatrix}
+      0 & 2(z-1) & 2y\\
+      -(z-1) & 0 & -x\\
+      0 & 0 & -z^2
+    \end{pmatrix}
+    \]
+    qui est continue donc $f$ est localement lipschitzienne.
+    On a vu que $V(x,y,z)$ était décroissante le long d'une courbe
+    intégrale $u = (x,y,z)$.
+    De plus, on voit que comme $a$, $b$ et $c$ sont positifs,
+    $V(x,y,z) > 0$ $\forall x,y,z \in \mathbb{R}^3\setminus\{(0,0,0)\}$.
+    On a donc $V(x) \geq V(0,0,0)$ car $V(0,0,0) = 0$.
+    $(0,0,0)$ est donc un équilibre stable.
+  \item
+    Le $V$ trouvé plus haut ne peut pas fonctionner ici
+    car $V \circ u$ n'est pas strictement décroissant pour tout
+    $u \in \Omega \setminus \{u_0\}$.
+    En effet, $(V \circ u)' = -2cz^4$
+    est nul pour tout $u = (x,y,0)$.
+    Démontrons le par la définition.
+    Pour cela, il nous faudra un peut d'intuition.
+    Comme on avait $(V \circ u)' = -2cz^4$, on est tenté de prendre $z = 0$
+    car ça rendrait $V \circ u$ constant.
+    Cherchons donc une solution avec $z = 0$, on a
+    \begin{align*}
+      x' & = -2x\\
+      y' & = x
+    \end{align*}
+    d'où une solution possible
+    $(x,y,z) = (x_0\cos(\sqrt{2}t),x_0/\sqrt{2}\sin(\sqrt{2}t),0)$ liée
+    à la condition initiale $u_0 = (x_0,0,0)$.
+    On voit donc que quelque quel que soit $\delta > 0$,
+    en prenant $0 < x_0 < \delta$,
+    on voit que la limite de $u$ quand $t$ tend vers l'infini ne converge pas,
+    $(0,0,0)$ n'est donc pas un équilibre asymptotiquement stable.
+\end{enumerate}
+
+\subsection*{4.4}
+$f$ définie par $f(x) = -x^3$ est localement lipschitzienne car sa dérivée
+$-3x^2$ est continue.
+$V(x) = x^2$ est de classe $C^1$ et
+$(V \circ x)' = V'(x)x' = -2x^4 \leq 0$ pour tout $x$ donc $V \circ x$
+est décroissante.
+De plus on voit que $V(x) = x^2 > 0$ pour tout $x \neq 0$.
+L'origine est donc un équilibre stable.
 
 \section{Problèmes aux limites pour les
 systèmes d'équations différentielles linéaires}
