@@ -442,6 +442,60 @@ Supposons sans perte de généralité que $x \leq y$ pour que $[x,y]$ ait du sen
     il n'existe pas de courbe intégrale maximale définie sur tout $\mathbb{R}$
     pour $(u_0,v_0) = (-\sqrt{2},-\sqrt{2})$.
   \item
+    Pour résoudre cet exercice, il faut un peu d'intuition.
+    Commençons donc par observer le comportement d'une courbe intégrale.
+    On voit que la dérivée seconde est de signe contraire de $u$.
+    Quand $u$ devient positif, sa dérivée va donc diminuer et $u$ va
+    augementer jusqu'à ce que sa dérivée soit nulle.
+    $u$ va alors diminuer et sa dérivée va augmenter jusqu'à ce que $u$ soit
+    nul.
+    Ça fait fort penser à une sinusoïde.
+    En effet, l'équation ressemble à celle du mouvement harmonique
+    $u''(t) = -ku(t)$ avec $k > 0$.
+    On peut prouver que le mouvement harmonique n'explose pas en montrant
+    que la somme entre l'énergie cinétique et l'énergie potentielle est
+    constante.
+    Inspirons nous de cette méthode et prouvons qu'une quantité
+    $Au'(t)^a + Bu(t)^b$ est constant.
+    D'où on trouve $(A,a,B,b) = (2,2,1,4)$.
+    En effet,
+    \[ (2u'(t)^2 + u(t)^4)' = -4u'(t)u^3(t) + 4u(t)^3u'(t) = 0. \]
+    Comme $2u'(t)^2 \leq 0$, on sait que pour tout $t$,
+    \[ |u(t)| \leq \sqrt[4]{2v_0^2 + u_0^4}. \]
+
+    Maintenant qu'on a l'intuition, prouvons qu'il existe une courbe
+    maximale pour chaque $u_0,v_0$.
+    Pour cela, montrons que
+    $f:\mathbb{R}^2 \to \mathbb{R}^2:(x_1,x_2) \mapsto (x_2,-x_1^3)$
+    est continue et localement lipschitzien ce qui est assuré par le fait
+    que
+    \[ Df(x_1,x_2) =
+      \begin{pmatrix}
+        0 & 1\\
+        -3x_1^2 & 0
+      \end{pmatrix}.
+    \]
+    est continue.
+    On sait maintenant en plus qu'elle est unique.
+
+    Montrons alors que cette courbe intégrale maximale $u:I\to\mathbb{R}$
+    est définie sur $I = \mathbb{R}$.
+    Soit $T > 0$, définissons le compact
+    \[ K_T = \{(t,u(t)) \in \mathbb{R}^2
+    | t \in [-T,T] \land |u(t)| \leq \sqrt[4]{2v_0^2 + u_0^4}\}. \]
+
+    Comme $u$ est maximale, on sait que
+    \begin{align*}
+      \sup\{t \in I | (t,u(t)) \in K_T\} & \in I\\
+      \inf\{t \in I | (t,u(t)) \in K_T\} & \in I
+    \end{align*}
+    et par construction de $K_T$,
+    \begin{align*}
+      \sup\{t \in I | (t,u(t)) \in K_T\} & = T\\
+      \inf\{t \in I | (t,u(t)) \in K_T\} & = -T
+    \end{align*}
+    d'où $[-T,T] \subseteq I$.
+    Comme c'est vrai pour un $T > 0$ quelconque, on a $I = \mathbb{R}$.
   \item
 \end{enumerate}
 
