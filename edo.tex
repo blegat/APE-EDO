@@ -247,9 +247,10 @@ En remplaçant cela dans la seconde équation du système, nous obtenons:
 0&=& \frac{\beta(t)}{t}\cdot \left( 1-t  \right)+\beta'(t)\\
 \frac{\beta'(t)}{\beta(t)}&=&\frac{t-1}{t} = 1-\frac{1}{t}\\
 \int_1^t \frac{\beta'(t)}{\beta(t)} &=& \int_1^t1-\frac{1}{t}\\
-\ln{\beta(t)} &=& t-\ln t + 1
+\ln{\beta(t)} &=& t-\ln t - 1
 \end{eqnarray*}
-On peut supprimer les constant car après dérivation elles disparaissent. On obtient donc que
+On peut supprimer les constantes car après dérivation elles disparaissent.
+On obtient donc que
 \begin{equation}
 \beta(t) = \frac{e^{t}}{t}
 \end{equation}
@@ -465,7 +466,7 @@ On peut donc déterminer la stabilité de $(0,0)$ à l'aide de
 \end{pmatrix}. \]
 Comme sa trace est négative est que son déterminant est positif,
 on sait que les deux valeurs propres ont une partie réelle négative.
-Elles valent d'ailleurs $1/2 \pm i\sqrt{3}/2$.
+Elles valent d'ailleurs $-1/2 \pm i\sqrt{3}/2$.
 
 $(0,0)$ est donc un équilibre asymptotiquement stable et donc aussi
 un équilibre stable.
