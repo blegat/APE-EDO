@@ -1,3 +1,5 @@
+**Depracated** use [this onse](https://github.com/Gp2mv3/Syntheses/)
+
 Voici quelques solutions d'exercices à ajouter dans le
 syllabus d'EDO de Jean van Schaftingen de l'UCL pour l'année suivante.
 Les pdf sont disponibles dans [EPL-Backup](https://www.dropbox.com/sh/5a1dfg8e17bbgkw/bgVWq1icjf)

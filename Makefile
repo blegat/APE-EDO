@@ -42,4 +42,4 @@ show: $(PDF_NAME)
 	$(PDFVIEWER) $(PDF_NAME) 2> /dev/null &
 
 release: $(PDF_NAME)
-	~/git/smartcp/src/smartcp.py -v config.yml
+	smartcp -v config.yml
