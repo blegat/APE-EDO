@@ -1,4 +1,4 @@
-**Depracated** use [this onse](https://github.com/Gp2mv3/Syntheses/)
+**Depracated** use [this one](https://github.com/Gp2mv3/Syntheses/)
 
 Voici quelques solutions d'exercices à ajouter dans le
 syllabus d'EDO de Jean van Schaftingen de l'UCL pour l'année suivante.
